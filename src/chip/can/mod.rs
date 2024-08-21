@@ -670,28 +670,23 @@ impl<P, const M: u8> CAN<P, M> {
         }
     }
 
-    #[inline(always)]
     fn mailbox_number_to_address(&self, mailbox_number: u8) -> u32 {
         self.base_address() + 0x80_u32 + (mailbox_number as u32 * 0x10_u32)
     }
 
-    #[inline(always)]
     fn mailbox_number_to_rximr_address(&self, mailbox_number: u8) -> u32 {
         self.base_address() + 0x880_u32 + (mailbox_number as u32 * 0x4_u32)
     }
 
-    #[inline(always)]
     fn mailbox_number_to_idflt_tab_address(&self, mailbox_number: u8) -> u32 {
         self.base_address() + 0xE0_u32 + (mailbox_number as u32 * 0x4_u32)
     }
 
-    #[inline(always)]
     fn read_mailbox_code(&mut self, mailbox_number: u8) -> u32 {
         let mailbox_addr = self.mailbox_number_to_address(mailbox_number);
         unsafe { core::ptr::read_volatile(mailbox_addr as *const u32) }
     }
 
-    #[inline(always)]
     fn read_mailbox(&mut self, mailbox_number: u8) -> Option<MailboxData> {
         if (self.read_imask() & (1_u64 << mailbox_number)) != 0 {
             return None;
@@ -752,7 +747,6 @@ impl<P, const M: u8> CAN<P, M> {
     }
 
     /// Write the registers of a mailbox.
-    #[inline(always)]
     fn write_mailbox(
         &self,
         mailbox_number: u8,
@@ -803,7 +797,6 @@ impl<P, const M: u8> CAN<P, M> {
     ///
     /// Once the MB is activated, it will participate into the arbitration process and eventually be
     /// transmitted according to its priority.
-    #[inline(always)]
     fn write_tx_mailbox(&mut self, mailbox_number: u8, frame: &Frame) {
         // Check if the respective interruption bit is set and clear it.
         self.write_iflag_bit(mailbox_number);
