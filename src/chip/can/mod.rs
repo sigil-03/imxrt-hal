@@ -2,7 +2,7 @@
 //!
 //! The FlexCAN module provides a CanBus peripheral that implements
 //! the `embedded_can` traits.
-//!//!
+//!
 //! # Example
 //!
 //! ```no_run
@@ -10,7 +10,7 @@
 //! use imxrt_ral;
 //!
 //! let can1_inst = unsafe { imxrt_ral::can::CAN1::instance() };
-//! let pads = unsafe { imxrt_hal::iomuxc::pads::Pads::new() }; // let p23 = imxrt_hal::iomuxc.gpio_ad_b1.p09,
+//! let pads = unsafe { imxrt_hal::iomuxc::pads::Pads::new() };
 //!
 //! let clock_frequency = imxrt_hal::ccm::XTAL_OSCILLATOR_HZ;
 //! let mut can1 = imxrt_hal::can::CAN::new(
