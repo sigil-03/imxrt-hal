@@ -7,6 +7,9 @@ pub mod ccm;
 pub mod dma;
 pub mod usbphy;
 
+#[path = "can/mod.rs"]
+pub mod can;
+
 cfg_if::cfg_if! {
     if #[cfg(chip = "imxrt1170")] {
         #[path = "imxrt11xx/imxrt1170.rs"]
@@ -15,7 +18,7 @@ cfg_if::cfg_if! {
 }
 
 pub(crate) mod reexports {
-    pub use super::usbphy;
+    pub use super::{can, usbphy};
 }
 
 pub(crate) mod drivers {}
