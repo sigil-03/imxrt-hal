@@ -635,15 +635,15 @@ impl<P, const M: u8> CAN<P, M> {
         };
         /* FIFO interrupts already enabled */
         const FLEXCAN_IMASK1_BUF5M: u32 = 0x00000020;
-        if (ral::read_reg!(ral::can, self.reg, IMASK1, BUFLM) & FLEXCAN_IMASK1_BUF5M) != 0 {
+        if (ral::read_reg!(ral::can, self.reg, IMASK1) & FLEXCAN_IMASK1_BUF5M) != 0 {
             return;
         };
         /* disable FIFO interrupt flags */
         modify_reg!(ral::can, self.reg, IMASK1, |reg| reg & !0xFF);
         /* enable FIFO interrupt */
         if enabled {
-            const FLEXCAN_IMASK1_BUF5M: u32 = 0x00000020;
-            modify_reg!(ral::can, self.reg, IMASK1, BUFLM: FLEXCAN_IMASK1_BUF5M);
+            modify_reg!(ral::can, self.reg, IMASK1, |imask1| imask1
+                | FLEXCAN_IMASK1_BUF5M);
         }
     }
 
