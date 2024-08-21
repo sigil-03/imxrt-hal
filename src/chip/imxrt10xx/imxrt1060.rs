@@ -5,11 +5,11 @@
 
 pub use imxrt_iomuxc::imxrt1060 as pads;
 
-// mod can;
-/// Drivers available for this chip
-#[path = "drivers"]
-pub(crate) mod drivers {
-    pub mod can;
+#[path = "../can/mod.rs"]
+pub mod can;
+
+pub(super) mod reexports {
+    pub use super::can;
 }
 
 #[path = "ccm"]
