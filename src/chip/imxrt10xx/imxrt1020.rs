@@ -5,7 +5,12 @@
 
 pub use imxrt_iomuxc::imxrt1020 as pads;
 
-pub(crate) mod drivers {}
+#[path = "../can/mod.rs"]
+pub mod can;
+
+pub(super) mod reexports {
+    pub use super::can;
+}
 
 #[path = "ccm"]
 pub(crate) mod ccm {

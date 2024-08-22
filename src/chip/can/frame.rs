@@ -292,13 +292,11 @@ impl CodeReg {
     }
 
     /// Returns `true` if the code reg is an extended identifier.
-    #[inline(always)]
     fn is_extended(self) -> bool {
         self.0 & Self::IDE_MASK != 0
     }
 
     /// Returns `true` if the code reg is a standard identifier.
-    #[inline(always)]
     fn is_standard(self) -> bool {
         !self.is_extended()
     }
@@ -339,7 +337,6 @@ impl IdReg {
     const EXTENDED_SHIFT: u32 = 0;
 
     /// Creates a new `IdReg`
-    #[inline(always)]
     fn new(id: u32) -> Self {
         Self(id)
     }
